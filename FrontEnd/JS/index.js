@@ -2,6 +2,15 @@
 
 const gallery = document.querySelector(".gallery")
 const portfolio = document.getElementById("portfolio")
+const body = document.querySelector("body");
+let token = window.localStorage.getItem("Token") // recuperation du Token
+let userId = window.localStorage.getItem("userId") // recup de l'Id de l'utilisateur
+const editBar = document.querySelector(".editModeBar")
+const logOut = document.querySelector(".logout")
+const editTitle = document.querySelector(".editTitle")
+const editBtn = document.querySelector(".editBtn")
+
+
 
 // recuperation du tableau works //
 async function getworks(){
@@ -38,19 +47,22 @@ function createWorks(work){
  // preciser l'emplacement des elements crées //
  gallery.appendChild(figure);
  figure.appendChild(img);
- figure.appendChild(figcaption);
-    
+ figure.appendChild(figcaption);  
 }
 
-//afficher les boutons filtres//
+//****afficher les boutons filtres****//
+
+// creation du conteneur des boutons dans le dom //
+
+const containerFiltres = document.createElement("div")
+containerFiltres.classList.add("container-filtres")
+portfolio.insertBefore (containerFiltres , gallery)
+
+// creation des boutons filtres //
 
 async function createBtn (){
     const arrayCategories = await getCategories()
     arrayCategories.unshift({id:0 , name:"Tous"}); //ajout d'un nouvel element au tableau des categories
-
-    const containerFiltres = document.createElement("div")
-    containerFiltres.classList.add("container-filtres")
-    portfolio.insertBefore (containerFiltres , gallery)
    
     arrayCategories.forEach((categorie) => {  
         const btn = document.createElement("button")
@@ -88,3 +100,33 @@ async function filtrerWorks () {
     });
 }
 filtrerWorks()
+
+// page d'accueil mode connecté //
+
+function editMode (){
+    if (userId) {
+        editBar.style.display = 'block'
+        logOut.textContent = "logout"
+        body.classList.add("body-padd")
+        editBtn.style.display = "block flex"
+        editTitle.classList.add("editMarge")
+        containerFiltres.style.display = 'none'
+    }   
+}
+editMode()
+
+// supprimer le Token apres deconnection //
+
+function logOutUser() {
+   logOut.addEventListener("click", () => {
+    if (userId){
+        window.localStorage.removeItem("Token")
+        window.localStorage.removeItem("userId")
+        logOut.textContent = "login"
+        window.location.href = "index.html"
+    }else{
+        window.location.replace  ("login.html")
+    }  
+   })
+}
+logOutUser()
