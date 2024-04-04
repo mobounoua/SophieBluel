@@ -137,8 +137,8 @@ li a:hover {
 	align-items: center;
 	gap: 15px;
 	height: 100px;
-  }
-  #portfolio .container-filtres .buttons-filtres {
+}
+#portfolio .container-filtres .buttons-filtres {
 	background-color: #fefef8;
 	padding: 9px 20px;
 	border: 1px solid #1d6154;
@@ -148,11 +148,11 @@ li a:hover {
 	font-size: 1.2rem;
 	font-family: Syne;
 	cursor: pointer;
-  }
-  #portfolio .container-filtres .active {
+}
+#portfolio .container-filtres .active {
 	background-color: #1d6154;
 	color: white;
-  }
+}
 .gallery {
 	width: 100%;
 	display: grid;
@@ -273,11 +273,10 @@ footer nav ul {
 	background-color: black;
 	height: 50px;
 	width: 100%;
-	position: fixed;
+	position:fixed;
   	top: 0;
   	left: 0;
   	right: 0; 
-  	z-index: 9999; /* Assure que la barre reste au-dessus du contenu */
 	display: none ;
 }
 
@@ -308,9 +307,225 @@ footer nav ul {
 	font-size: 16px;
 	font-weight: 500;
 	display: none;
+	cursor: pointer;
+}
 
+.editBtn:hover{
+	color: #B1663C;
 }
 
 .editMarge{
 	margin-bottom: 70px;
+}
+
+/*** Modal ****/
+
+#modal{
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background-color: rgba(0, 0, 0, 0.3);
+	display: none;
+	justify-content: center;
+	align-items: center;
+	
+}
+
+.modal-portfolio{
+	background-color: white;
+	width: 38%;
+	height: 80%;
+	position: relative;
+	border-radius: 10px;
+	min-height: 500px;
+  	min-width: 300px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: center;
+	margin: 0;
+}
+.modal-portfolio h3{
+	font-size: 26px;
+	margin-top: 30px;
+}
+.modal-portfolio .fa-xmark{
+	position: absolute;
+	top: 25px;
+	right: 30px;
+	font-size: 18px;
+	cursor: pointer;
+}
+.modal-gallery-btn{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	width: 70%;
+	height: 80%;
+}
+
+.modal-gallery{
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr ;	
+	grid-column-gap: 10px;
+	grid-row-gap: 20px;
+}
+
+.modal-gallery figure{
+	width: 100%;
+	height: 100%;
+	position: relative;
+	
+}
+
+.modal-gallery figure img{
+	height: 100%;
+	width: 100%;
+
+}
+
+.modal-gallery figure span{
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	background-color: black;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 2px;
+	height: 17px;
+	width: 17px;
+}
+
+.modal-gallery figure span .fa-trash-can{
+	color: white;
+	font-size: 0.6rem;
+	cursor: pointer;
+}
+
+.modal-container-btn{
+	width: 100%;
+	height: 20%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-top:  1px solid #B3B3B3;
+	margin-top: 10px;
+}
+.modal-btn{
+	background-color: #1d6154;
+  	padding: 9px 20px;
+  	border-radius: 60px;
+  	color: white;
+  	font-weight: 700;
+  	font-size: 1rem;
+  	font-family: Syne;
+  	cursor: pointer;
+	width: 180px;
+	text-align: center;
+}
+.modal-btn:hover{
+	background-color: #14443c ;
+}
+
+.modal-btn:active{
+	background-color: #0d302a;
+}
+/* 2eme modale */
+.modalAddWork{
+	background-color: white;
+	width: 38%;
+	height: 80%;
+	position: relative;
+	border-radius: 10px;
+	min-height: 500px;
+  	min-width: 300px;
+	display: none;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: center;
+	margin: 0;
+}
+.modalAddWork .fa-xmark{
+	position: absolute;
+	top: 25px;
+	right: 30px;
+	font-size: 18px;
+	cursor: pointer;
+}
+.modalAddWork .fa-arrow-left{
+	position: absolute;
+	top: 25px;
+	left: 30px;
+	font-size: 20px;
+	cursor: pointer;
+}
+.modalAddWork h3{
+	font-size: 26px;
+	margin-top: 30px;	
+}
+.modalAddWork form{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: 80%;
+	width: 70%;
+}
+.containerAddPhoto{
+	height: 32%;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background-color: #E8F1F6;
+	border-radius: 3px;
+	margin-bottom: 20px;
+	gap: 5px;
+	position: relative;
+}
+.containerAddPhoto .fa-image{
+	font-size: 55px;
+	color: #B9C5CC;
+}
+.containerAddPhoto label{
+	background-color: #CBD6DC;
+	padding: 10px;
+	border-radius: 50px;
+	color: #306685;
+	width: 50%;
+	text-align: center;
+	font-weight: bold;
+	cursor: pointer;
+}
+.containerAddPhoto p{
+	font-size: 10px;
+	color: #444444;
+}
+.containerAddPhoto input{
+	display: none;
+}
+.containerAddPhoto img {
+	display: none;
+	height: 100%;
+	width: 60%;
+	z-index: 2;
+	position: absolute;
+}
+form .labelStyle{
+	font-size: 14px;
+	color: #3D3D3D;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+#categoryInput, #title{
+	margin-bottom: 20px;
+	height: 10%;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }

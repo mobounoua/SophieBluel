@@ -29,6 +29,7 @@ getCategories()
 // afficher les works dans le DOM//
 
 async function afficherWorks (){
+    gallery.innerHTML = "";
     const arrayWorks = await getworks()
     arrayWorks.forEach((work) => {  
         createWorks(work)

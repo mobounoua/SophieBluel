@@ -11,6 +11,7 @@
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
 	<script src="JS/index.js" defer></script>
+	<script src="JS/modal.js" defer></script>
 </head>
 
 <body>
@@ -49,6 +50,7 @@
 				<p>modifier</p>
 			</div>
 		</div>
+		
 		<div class="gallery">
 		</div>
 	</section>
@@ -74,5 +76,42 @@
 		</ul>
 	</nav>
 </footer>
+
+<div id="modal">
+	<section class="modal-portfolio">
+		<h3>Galerie photo</h3>
+		<span><i class="fa-solid fa-xmark"></i></span>
+		<div class="modal-gallery-btn">
+			<div class="modal-gallery">
+			</div>
+			<div class="modal-container-btn">
+				<div id="btnAdd" class="modal-btn">Ajouter une photo</div>
+			</div>
+		</div>
+	</section> 
+	<section class="modalAddWork">
+		<h3>Ajout photo</h3>
+		<span><i class="fa-solid fa-xmark"></i></span>
+		<span><i class="fa-solid fa-arrow-left"></i></span>
+		<form >
+			<div class="containerAddPhoto">
+				<i class="fa-regular fa-image"></i>
+				<label for="file">+ Ajouter photo</label>
+				<p>jpg, png : 4mo max</p>
+				<input type="file" id="file" name="image" accept="image/jpg, image/png" required>
+				<img id="previewImage" src="#" alt="Aperçu de l'image">
+			</div>
+			<label class="labelStyle" for="title">Titre</label>
+			<input  type="text" id="title" name="title" required>
+			<label  class="labelStyle" for="categoryInput">Catégorie</label>
+			<select  name="category" id="categoryInput" required></select>
+			<div class="modal-container-btn">
+				<div class="modal-btn">Valider</div>
+			</div>
+		</form>
+	</section>
+</div>
+
+
 </body>
 </html>
