@@ -418,15 +418,19 @@ footer nav ul {
 }
 .modal-btn{
 	background-color: #1d6154;
-  	padding: 9px 20px;
+	display: flex;
+	justify-content: center ;
+	align-items: center;
+	padding: 10px 10px;
   	border-radius: 60px;
   	color: white;
   	font-weight: 700;
   	font-size: 1rem;
   	font-family: Syne;
   	cursor: pointer;
-	width: 180px;
-	text-align: center;
+	width: 200px;
+	height: 36px;
+	border: none;
 }
 .modal-btn:hover{
 	background-color: #14443c ;

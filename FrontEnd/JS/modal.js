@@ -11,6 +11,9 @@ const arrowLeft = document.querySelector('.fa-arrow-left')
 // variables pour l'apreçu de l'image //
 const previewImg = document.getElementById("previewImage")
 const inputFile = document.querySelector(".containerAddPhoto input")
+// variables pour l'ajout des photos //
+const formAdd = document.getElementById("formAddWork")
+
 
 //* afficher la modale *//
 
@@ -32,11 +35,11 @@ function closeModal () {
         previewImg.style.display = "none";
         modal.style.display = "none"
     })
-    modal.addEventListener("click" , (e) => {
-        inputFile.value = "";
-        previewImg.style.display = "none";
+    modal.addEventListener("click" , (e) => {   
         if (e.target == modal) {
             modal.style.display = "none";
+            inputFile.value = "";
+            previewImg.style.display = "none";
         }
     })
 }
@@ -140,3 +143,29 @@ async function categoryModal(){
     });
 }
 categoryModal()
+
+// ajouter des photos //
+function addwork() {
+    formAdd.addEventListener("submit", (e) =>{
+        e.preventDefault()
+        const formData = new FormData(formAdd);
+        fetch ("http://localhost:5678/api/works" ,{
+            method : "POST",
+            headers : {
+                Authorization : "Bearer "+token},
+            body : formData
+            })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Erreur lors de l'envoi du fichier");
+            }
+            return response.json ()  
+        }).then((data) =>{
+            afficherWorkModal()
+            afficherWorks()
+            formAdd.reset()
+        })
+        
+    })      
+}
+addwork()
