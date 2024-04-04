@@ -101,12 +101,15 @@
 				<input type="file" id="file" name="image" accept="image/jpg, image/png" required>
 				<img id="previewImage" src="#" alt="Aperçu de l'image">
 			</div>
+			<p class="errorSize">La taille de l'image dépasse la limite maximale de 4 Mo</p>
 			<label class="labelStyle" for="title">Titre</label>
 			<input  type="text" id="title" name="title" required>
 			<label  class="labelStyle" for="categoryInput">Catégorie</label>
-			<select  name="category" id="categoryInput" required></select>
+			<select  name="category" id="categoryInput" required>
+				<option  selected disabled></option>
+			</select>
 			<div class="modal-container-btn">
-				<button type="submit" class="modal-btn">Valider</button>
+				<button type="submit" id="submitBtn" disabled >Valider</button>
 			</div>
 		</form>
 	</section>

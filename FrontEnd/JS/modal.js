@@ -13,10 +13,11 @@ const previewImg = document.getElementById("previewImage")
 const inputFile = document.querySelector(".containerAddPhoto input")
 // variables pour l'ajout des photos //
 const formAdd = document.getElementById("formAddWork")
-
+const selectInput = document.getElementById("categoryInput")
+const titleInput = document.getElementById("title")
+const submitBtn = document.getElementById("submitBtn")
 
 //* afficher la modale *//
-
 function displayModal () {
     const editBtn = document.querySelector(".editBtn")
     editBtn.addEventListener("click", () => {
@@ -46,7 +47,6 @@ function closeModal () {
 closeModal()
 
 // afficher la gallerie dans la modale //
-
 async function afficherWorkModal () {
     modalGallery.innerHTML = "";
     const arrayWorks = await getworks()
@@ -124,6 +124,17 @@ function prevImg () {
             // Affichez  l'aperçu
             previewImg.src = imageURL;
             previewImg.style.display = "block";
+            // Vérifier la taille du fichier
+            const errorSize = document.querySelector(".errorSize")
+            const maxSize = 4 * 1024 * 1024; // 4 Mo
+            if (file.size > maxSize) {
+            errorSize.style.display= "block" // affichage du message d'erreur
+            inputFile.value = '';
+            previewImg.style.display = "none";
+            return;
+            }else{
+                errorSize.style.display = 'none';
+            }
         }else {
             previewImg.style.display = "none";
         }
@@ -133,13 +144,12 @@ prevImg()
 
 // generer le menu catégories  //
 async function categoryModal(){
-    const select = document.getElementById("categoryInput")
     const categories = await getCategories();
     categories.forEach(category => {
         const option = document.createElement("option")
         option.value = category.id
         option.textContent = category.name
-        select.appendChild(option)
+        selectInput.appendChild(option)
     });
 }
 categoryModal()
@@ -151,8 +161,7 @@ function addwork() {
         const formData = new FormData(formAdd);
         fetch ("http://localhost:5678/api/works" ,{
             method : "POST",
-            headers : {
-                Authorization : "Bearer "+token},
+            headers : {Authorization : "Bearer "+token},
             body : formData
             })
         .then((response) => {
@@ -164,8 +173,30 @@ function addwork() {
             afficherWorkModal()
             afficherWorks()
             formAdd.reset()
+            inputFile.value = "";
+            previewImg.style.display = "none";
         })
-        
     })      
 }
 addwork()
+
+// verifier si les champs sont remplis avant de valider //
+
+function updateSubmitButton() {
+    formAdd.addEventListener("change", () =>{
+        if (selectInput.value && titleInput.value.trim().length > 0 && inputFile.files[0]) {            
+            submitBtn.disabled = false;
+            submitBtn.style.backgroundColor = "#1d6154";
+            submitBtn.addEventListener("mouseenter", ()=> {
+                submitBtn.style.backgroundColor = "#14443c";
+            }); 
+            submitBtn.addEventListener("mouseleave", function() {
+                submitBtn.style.backgroundColor = "#1d6154";
+            });
+        } else {            
+            submitBtn.disabled = true;
+            submitBtn.style.backgroundColor = "#a7a7a7"; 
+        }   
+    })
+}
+updateSubmitButton()

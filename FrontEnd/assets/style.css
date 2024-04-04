@@ -520,6 +520,12 @@ footer nav ul {
 	z-index: 2;
 	position: absolute;
 }
+.errorSize{
+	color:#ff0000 ;
+	font-size: 12px;
+	text-align: center;
+	display: none;
+}
 form .labelStyle{
 	font-size: 14px;
 	color: #3D3D3D;
@@ -532,4 +538,20 @@ form .labelStyle{
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+#submitBtn{
+	background-color: #a7a7a7;
+	display: flex;
+	justify-content: center ;
+	align-items: center;
+	padding: 10px 10px;
+  	border-radius: 60px;
+  	color: white;
+  	font-weight: 700;
+  	font-size: 1rem;
+  	font-family: Syne;
+  	cursor: pointer;
+	width: 200px;
+	height: 36px;
+	border: none;
 }
