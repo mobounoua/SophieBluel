@@ -17,14 +17,12 @@ async function getworks(){
     const reponse = await fetch("http://localhost:5678/api/works");
     return await reponse.json()
 }
-getworks()
 
 // recuperation des categories //
 async function getCategories(){
     const reponse = await fetch("http://localhost:5678/api/categories");
     return await reponse.json()
 }
-getCategories()
 
 // afficher les works dans le DOM//
 
@@ -35,7 +33,6 @@ async function afficherWorks (){
         createWorks(work)
      });          
 }
-afficherWorks()
 
 function createWorks(work){
  // creer les elements du DOM // 
@@ -73,7 +70,6 @@ async function createBtn (){
         containerFiltres.appendChild(btn)
      });          
 }
-createBtn()
 
 // filtrer les works par categorie //
 
@@ -100,11 +96,10 @@ async function filtrerWorks () {
         })
     });
 }
-filtrerWorks()
 
 // page d'accueil mode connecté //
 
-function editMode (){
+function editMode(){
     if (userId) {
         editBar.style.display = 'block'
         logOut.textContent = "logout"
@@ -112,9 +107,11 @@ function editMode (){
         editBtn.style.display = "block flex"
         editTitle.classList.add("editMarge")
         containerFiltres.style.display = 'none'
-    }   
+    }  else {
+        // L'utilisateur n'est pas connecté
+        console.log("L'utilisateur n'est pas connecté");
+      } 
 }
-editMode()
 
 // supprimer le Token apres deconnection //
 
@@ -130,4 +127,12 @@ function logOutUser() {
     }  
    })
 }
+
+// l'appel des fonctions //
+getworks()
+getCategories()
+afficherWorks()
+createBtn()
+filtrerWorks()
+editMode()
 logOutUser()

@@ -1,13 +1,13 @@
 ////* VARIABLES *////
 const modal = document.getElementById("modal")
-const xmark = document.querySelector('.modal-portfolio .fa-xmark')
-const xmark2 = document.querySelector('.modalAddWork .fa-xmark')
+const xmark = document.querySelector(".modal-portfolio .fa-xmark")
+const xmark2 = document.querySelector(".modalAddWork .fa-xmark")
 const modalGallery = document.querySelector(".modal-gallery")
 // variables pour afficher la 2eme modale//
 const buttonAddPhoto = document.getElementById("btnAdd")
 const modalPortfolio = document.querySelector(".modal-portfolio")
 const modalAddWork = document.querySelector(".modalAddWork")
-const arrowLeft = document.querySelector('.fa-arrow-left')
+const arrowLeft = document.querySelector(".fa-arrow-left")
 // variables pour l'apreçu de l'image //
 const previewImg = document.getElementById("previewImage")
 const inputFile = document.querySelector(".containerAddPhoto input")
@@ -18,13 +18,12 @@ const titleInput = document.getElementById("title")
 const submitBtn = document.getElementById("submitBtn")
 
 //* afficher la modale *//
-function displayModal () {
+function displayModal(){
     const editBtn = document.querySelector(".editBtn")
     editBtn.addEventListener("click", () => {
         modal.style.display = "flex"
     })
 }
-displayModal()
 
 // fermer la modale //
 function closeModal () {
@@ -41,13 +40,14 @@ function closeModal () {
             modal.style.display = "none";
             inputFile.value = "";
             previewImg.style.display = "none";
+        }else{
+            //console.log(veuillez cliquer à l'exterieur de la modale pour la fermer)
         }
     })
 }
-closeModal()
 
 // afficher la gallerie dans la modale //
-async function afficherWorkModal () {
+async function afficherWorkModal(){
     modalGallery.innerHTML = "";
     const arrayWorks = await getworks()
     arrayWorks.forEach((work) => {  
@@ -55,7 +55,6 @@ async function afficherWorkModal () {
     })
     deleteWork()  
 }
-afficherWorkModal()
 
 function createWorkModal (work) {
     const figure = document.createElement("figure");
@@ -65,7 +64,7 @@ function createWorkModal (work) {
     trash.id = work.id
     img.src = work.imageUrl
     img.alt = work.title
-    trash.classList.add( "fa-solid" ,"fa-trash-can")
+    trash.classList.add("fa-solid" ,"fa-trash-can")
     modalGallery.appendChild(figure)
     figure.appendChild(img)
     figure.appendChild(span)
@@ -73,13 +72,13 @@ function createWorkModal (work) {
 }
 
 // supprimer work a partir de la poubelle //
-function deleteWork () {
+function deleteWork() {
     const trashs = document.querySelectorAll(".fa-trash-can")
     trashs.forEach((trash) => {
         trash.addEventListener("click" , (e) =>{
             e.preventDefault()                    
             const id = e.target.id     
-            fetch ("http://localhost:5678/api/works/"+id ,{
+            fetch("http://localhost:5678/api/works/"+id ,{
             method : "DELETE",
             headers : {
                 "Content-Type" : "application/json",
@@ -96,15 +95,15 @@ function deleteWork () {
 }
 
 // Afficher la 2eme modale //
-function displayAddModal () {
-    buttonAddPhoto.addEventListener('click' , () =>{
+function displayAddModal() {
+    buttonAddPhoto.addEventListener("click" , () =>{
         modalPortfolio.style.display = "none"
         modalAddWork.style.display = "flex"
     })
 }
-displayAddModal()
+
 //retourner à la modale precedente//
-function returnModalPortfolio () {
+function returnModalPortfolio() {
     arrowLeft.addEventListener("click" ,() => {
         inputFile.value = "";
         previewImg.style.display = "none";
@@ -112,7 +111,6 @@ function returnModalPortfolio () {
         modalAddWork.style.display = "none"
     })
 }
-returnModalPortfolio()
 
 // previsualisation de l'image //
 function prevImg () {
@@ -133,14 +131,13 @@ function prevImg () {
             previewImg.style.display = "none";
             return;
             }else{
-                errorSize.style.display = 'none';
+                errorSize.style.display = "none";
             }
-        }else {
+        }else{
             previewImg.style.display = "none";
         }
     }
 )}
-prevImg()
 
 // generer le menu catégories  //
 async function categoryModal(){
@@ -152,7 +149,6 @@ async function categoryModal(){
         selectInput.appendChild(option)
     });
 }
-categoryModal()
 
 // ajouter des photos //
 function addwork() {
@@ -178,13 +174,12 @@ function addwork() {
         })
     })      
 }
-addwork()
 
 // verifier si les champs sont remplis avant de valider //
 
 function updateSubmitButton() {
     formAdd.addEventListener("change", () =>{
-        if (selectInput.value && titleInput.value.trim().length > 0 && inputFile.files[0]) {            
+        if(selectInput.value && titleInput.value.trim().length > 0 && inputFile.files[0]) {            
             submitBtn.disabled = false;
             submitBtn.style.backgroundColor = "#1d6154";
             submitBtn.addEventListener("mouseenter", ()=> {
@@ -193,10 +188,20 @@ function updateSubmitButton() {
             submitBtn.addEventListener("mouseleave", function() {
                 submitBtn.style.backgroundColor = "#1d6154";
             });
-        } else {            
+        }else{            
             submitBtn.disabled = true;
             submitBtn.style.backgroundColor = "#a7a7a7"; 
         }   
     })
 }
+
+// l'appel des fonctions //
+displayModal()
+closeModal()
+afficherWorkModal()
+displayAddModal()
+returnModalPortfolio()
+prevImg()
+categoryModal()
+addwork()
 updateSubmitButton()
