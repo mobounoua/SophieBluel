@@ -25,8 +25,7 @@ async function getCategories(){
 }
 
 // afficher les works dans le DOM//
-
-async function afficherWorks (){
+async function afficherWorks(){
     gallery.innerHTML = "";
     const arrayWorks = await getworks()
     arrayWorks.forEach((work) => {  
@@ -62,7 +61,7 @@ async function createBtn (){
     const arrayCategories = await getCategories()
     arrayCategories.unshift({id:0 , name:"Tous"}); //ajout d'un nouvel element au tableau des categories
    
-    arrayCategories.forEach((categorie) => {  
+    arrayCategories.forEach((categorie) =>{  
         const btn = document.createElement("button")
         btn.classList.add("buttons-filtres")
         btn.id = categorie.id
@@ -73,7 +72,7 @@ async function createBtn (){
 
 // filtrer les works par categorie //
 
-async function filtrerWorks () {
+async function filtrerWorks(){
     const arrayWorks = await getworks()
     const buttons = document.querySelectorAll(".buttons-filtres")
     buttons.forEach(button => {
